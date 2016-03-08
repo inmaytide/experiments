@@ -12,12 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.inmaytide.webapp.service.CustomerService;
+import com.inmaytide.webapp.utils.CastUtil;
 
 /**
  * Servlet implementation class CustomerCreateServlet
  */
-@WebServlet("/customer_create")
-public class CustomerCreateServlet extends HttpServlet {
+@WebServlet("/customer_edit")
+public class CustomerEditServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -38,7 +39,7 @@ public class CustomerCreateServlet extends HttpServlet {
 			String name = enumeration.nextElement();
 			fieldMap.put(name, request.getParameter(name));
 		}
-		customerService.createCustomer(fieldMap);
+		customerService.updateCustomer(CastUtil.castInt(fieldMap.get("id")), fieldMap);
 		request.getRequestDispatcher("/WEB-INF/view/list_customer.jsp").forward(request, response);
 	}
 

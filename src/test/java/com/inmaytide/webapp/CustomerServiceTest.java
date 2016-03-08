@@ -11,9 +11,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.inmaytide.webapp.helper.DatabaseHelper;
 import com.inmaytide.webapp.model.Customer;
 import com.inmaytide.webapp.service.CustomerService;
-import com.inmaytide.webapp.utils.PropsUtil;
 
 /**
  * @author inmaytide
@@ -29,7 +29,7 @@ public class CustomerServiceTest {
 
 	@Before
 	public void init() {
-		PropsUtil.loadProps("config.properties");
+		DatabaseHelper.executeSqlFile("sql/customer_init.sql");
 	}
 	
 	@Test

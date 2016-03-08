@@ -4,14 +4,17 @@
 package com.inmaytide.webapp.helper;
 
 import java.io.Serializable;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
@@ -23,38 +26,38 @@ import com.inmaytide.webapp.utils.CollectionUtil;
 import com.inmaytide.webapp.utils.PropsUtil;
 
 /**
+ * 
  * @author Administrator
- *
  */
 public final class DatabaseHelper {
 	
-	private static final String DRIVER;
-	private static final String URL;
-	private static final String USERNAME;
-	private static final String PASSWORD;
 	private static final Logger logger = LoggerFactory.getLogger(DatabaseHelper.class);
-	private static final QueryRunner queryRunner = new QueryRunner();
-	private static final ThreadLocal<Connection> connectionHolder = new ThreadLocal<Connection>();
+	private static final QueryRunner queryRunner;
+	private static final ThreadLocal<Connection> connectionHolder;
+	private static final BasicDataSource dataSource;
 	
 	static {
-		Properties props = PropsUtil.loadProps("config.properties");
-		DRIVER = props.getProperty("jdbc.driver");
-		URL = props.getProperty("jdbc.url");
-		USERNAME = props.getProperty("jdbc.username");
-		PASSWORD = props.getProperty("jdbc.password");
+		queryRunner = new QueryRunner();
+		connectionHolder = new ThreadLocal<Connection>();
+		dataSource = new BasicDataSource();
 		
-		try {
-			Class.forName(DRIVER);
-		} catch (ClassNotFoundException e) {
-			logger.error("Can not load jdbc driver.", e);
-		}
+		Properties props = PropsUtil.loadProps("config.properties");
+		String driver = props.getProperty("jdbc.driver");
+		String url = props.getProperty("jdbc.url");
+		String username = props.getProperty("jdbc.username");
+		String password = props.getProperty("jdbc.password");
+		
+		dataSource.setDriverClassName(driver);
+		dataSource.setUrl(url);
+		dataSource.setUsername(username);
+		dataSource.setPassword(password);
 	}
 	
 	public static Connection getConnection() {
 		Connection con = connectionHolder.get();
 		if (null == con) {
 			try {
-				con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+				con = dataSource.getConnection();
 			} catch (SQLException e) {
 				logger.error("Get connection failure!!!", e);
 				throw new RuntimeException(e);
@@ -65,20 +68,6 @@ public final class DatabaseHelper {
 		return con;
 	}
 	
-	public static void closeConnection() {
-		Connection conn = connectionHolder.get();
-		if (null != conn) {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				logger.error("Close connection failure!!!", e);
-				throw new RuntimeException(e);
-			} finally {
-				connectionHolder.remove();
-			}
-		}
-	}
-	
 	public static <T> List<T> queryEntityList(Class<T> cls, String sql, Object... params) {
 		List<T> list = null;
 		Connection con = getConnection();
@@ -87,8 +76,6 @@ public final class DatabaseHelper {
 		} catch (SQLException e) {
 			logger.error("Query entity list failure", e);
 			throw new RuntimeException(e);
-		} finally {
-			closeConnection();
 		}
 		return list;
 	}
@@ -101,8 +88,6 @@ public final class DatabaseHelper {
 		} catch (SQLException e) {
 			logger.error("Query entity failure", e);
 			throw new RuntimeException(e);
-		} finally {
-			closeConnection();
 		}
 		return t;
 	}
@@ -115,8 +100,6 @@ public final class DatabaseHelper {
 		} catch (SQLException e) {
 			logger.error("Execute query failure", e);
 			throw new RuntimeException(e);
-		} finally {
-			closeConnection();
 		}
 		return result;
 	}
@@ -130,8 +113,6 @@ public final class DatabaseHelper {
 		} catch (SQLException e) {
 			logger.error("Execute update failure", e);
 			throw new RuntimeException(e);
-		} finally {
-			closeConnection();
 		}
 		return rows;
 	}
@@ -183,5 +164,18 @@ public final class DatabaseHelper {
 
 	private static String getTableName(Class<?> cls) {
 		return cls.getSimpleName();
+	}
+
+	public static void executeSqlFile(String filePath) {
+		try {
+			URI uri = Thread.currentThread().getContextClassLoader().getResource(filePath).toURI();
+			Files.lines(Paths.get(uri)).forEach((sql) -> {
+				executeUpdate(sql);
+			});
+		} catch (Exception e) {
+			logger.error("Execute sqlfile failure", e);
+			throw new RuntimeException(e);
+		} 
+		
 	}
 }
