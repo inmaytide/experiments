@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.inmaytide.webapp.model.Customer;
 import com.inmaytide.webapp.service.CustomerService;
+import com.inmaytide.webapp.utils.PropsUtil;
 
 /**
  * @author inmaytide
@@ -28,12 +29,12 @@ public class CustomerServiceTest {
 
 	@Before
 	public void init() {
-		
+		PropsUtil.loadProps("config.properties");
 	}
 	
 	@Test
 	public void getCustomerListTest() {
-		List<Customer> list = customerService.getCustomerList("");
+		List<Customer> list = customerService.getCustomerList();
 		Assert.assertEquals(2, list.size());
 	}
 	
