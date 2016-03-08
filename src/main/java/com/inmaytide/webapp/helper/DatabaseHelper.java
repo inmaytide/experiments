@@ -22,8 +22,8 @@ import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.inmaytide.webapp.utils.CollectionUtil;
-import com.inmaytide.webapp.utils.PropsUtil;
+import com.inmaytide.framework.utils.CollectionUtil;
+import com.inmaytide.framework.utils.PropsUtil;
 
 /**
  * 

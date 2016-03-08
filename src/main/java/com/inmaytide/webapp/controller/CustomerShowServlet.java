@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.inmaytide.framework.utils.CastUtil;
 import com.inmaytide.webapp.model.Customer;
 import com.inmaytide.webapp.service.CustomerService;
-import com.inmaytide.webapp.utils.CastUtil;
 
 /**
  * Servlet implementation class CustomerServlet
