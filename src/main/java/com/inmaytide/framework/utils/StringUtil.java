@@ -22,4 +22,8 @@ public class StringUtil {
 		return !isEmpty(str);
 	}
 
+	public static String[] splitString(String str, String separatorChars) {
+		return StringUtils.split(str, separatorChars);
+	}
+
 }
