@@ -1,6 +1,6 @@
 package com.inmaytide.framework.proxy;
 
-public class Hello implements IHello {
+public class HelloImpl implements IHello {
 
 	@Override
 	public void say(String name) {

@@ -5,6 +5,7 @@ package com.inmaytide.framework.proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 /**
  * @author inmaytide
@@ -35,6 +36,11 @@ public class DynamicProxy implements InvocationHandler {
 	
 	public void after() {
 		System.out.println("after");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T getProxy() {
+		return (T) Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), this);
 	}
 
 }
