@@ -1,0 +1,42 @@
+/**
+ * 
+ */
+package com.inmaytide.framework.aop.springdemo;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.inmaytide.framework.aop.Greeting;
+
+/**
+ * @author Administrator
+ *
+ */
+public class Client {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+//		ProxyFactory proxyFactory = new ProxyFactory();
+//		proxyFactory.setTarget(new GreetingImpl());
+//		String name = "Jack";
+//   	前置增强和后置增强
+//		proxyFactory.addAdvice(new GreetingAfterAdvice());
+//		proxyFactory.addAdvice(new GreetingBeforeAdvice());
+		
+		//前置增强和后置增强放在同意个类里面
+//		proxyFactory.addAdvice(new GreetingBeforeAndAfterAdvice());
+//		name = "Rose";
+		
+		//环绕增强
+//		proxyFactory.addAdvice(new GreetingAroundAdvice());
+//		name = "Chris";
+		
+		@SuppressWarnings("resource")
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		Greeting inst = (Greeting) context.getBean("greetingProxy");
+		inst.say("Moss");
+	}
+
+}

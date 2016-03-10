@@ -20,7 +20,7 @@ public class CGLibProxy implements MethodInterceptor {
 	}
 	
 	private final static class CGLibProxyHolder {
-		private static final CGLibProxy instance = new CGLibProxy();
+		private final static CGLibProxy instance = new CGLibProxy();
 	}
 	
 	public static CGLibProxy getInstance() {
