@@ -22,6 +22,7 @@ public class GreetingImpl implements Greeting {
 	@Override
 	public void say(String name) {
 		logger.info("Hello! " + name);
+	//	throw new RuntimeException("Error");
 	}
 	
 }

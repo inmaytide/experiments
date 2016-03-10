@@ -37,6 +37,9 @@ public class Client {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		Greeting inst = (Greeting) context.getBean("greetingProxy");
 		inst.say("Moss");
+		
+		Apology apology = (Apology) inst;
+		apology.saySorry("Mars");
 	}
 
 }
