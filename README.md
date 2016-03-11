@@ -1,4 +1,9 @@
-# framework<br/>架构探险<br/>&nbsp;&nbsp;&nbsp;&nbsp;--重零开始写Java Web框架书中的例子练习(框架部分)
+#架构探险<br/>&nbsp;&nbsp;&nbsp;&nbsp;--重零开始写Java Web框架<br/>书中的例子练习(框架部分)
+
+### 开发环境
+jdk 1.8<br/>
+maven 3.3.3<br/>
+eclipse Mars.2<br/>
 
 ###关于代理
 1.静态代理（代码太多，自己写代码实现）<br/>
