@@ -6,7 +6,8 @@ package com.inmaytide.framework.aop.springdemo;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.inmaytide.framework.aop.Greeting;
+//import com.inmaytide.framework.aop.Greeting;
+import com.inmaytide.framework.aop.GreetingImpl;
 
 /**
  * @author Administrator
@@ -35,11 +36,17 @@ public class Client {
 		
 		@SuppressWarnings("resource")
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-		Greeting inst = (Greeting) context.getBean("greetingProxy");
+		
+//		Arrays.stream(context.getBeanDefinitionNames()).forEach(s -> System.out.println(s));
+		GreetingImpl inst = (GreetingImpl) context.getBean("greetingImpl");
 		inst.say("Moss");
 		
-		Apology apology = (Apology) inst;
-		apology.saySorry("Mars");
+		inst.goodMorning("Moss");
+		inst.goodNight("Moss");
+		
+		
+//		Apology apology = (Apology) inst;
+//		apology.saySorry("Mars");
 	}
 
 }
