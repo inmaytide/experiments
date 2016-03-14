@@ -36,7 +36,12 @@ public class ClassHelper {
 	public static Set<Class<?>> getControllerClassSet() {
 		return filterClassSetByAnnotation(Controller.class);
 	}
-
+	
+	/**
+	 * 获取应用包名下带有某注解的类
+	 * @param annotation
+	 * @return
+	 */
 	public static Set<Class<?>> filterClassSetByAnnotation(Class<? extends Annotation> annotation) {
 		return CLASS_SET.stream().filter(cls -> cls.isAnnotationPresent(annotation)).collect(Collectors.toSet());
 	}
@@ -46,5 +51,13 @@ public class ClassHelper {
 		classSet.addAll(getServiceClassSet());
 		classSet.addAll(getControllerClassSet());
 		return classSet;
+	}
+	/**
+	 * 获取应用包名下某父类（或接口）的所有子类（或实现类）
+	 * @param superClass
+	 * @return
+	 */
+	public static Set<Class<?>> filterClassSetBySuper(Class<?> superClass) {
+		return CLASS_SET.stream().filter(cls -> superClass.isAssignableFrom(cls) && !superClass.equals(cls)).collect(Collectors.toSet());
 	}
 }
