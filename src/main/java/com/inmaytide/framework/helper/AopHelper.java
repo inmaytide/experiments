@@ -15,6 +15,7 @@ import com.inmaytide.framework.annotation.Aspect;
 import com.inmaytide.framework.proxy.AspectProxy;
 import com.inmaytide.framework.proxy.Proxy;
 import com.inmaytide.framework.proxy.ProxyManager;
+import com.inmaytide.framework.proxy.TransactionProxy;
 import com.inmaytide.framework.utils.ReflectionUtil;
 
 public class AopHelper {
@@ -46,6 +47,17 @@ public class AopHelper {
 	
 	public static Map<Class<?>, Set<Class<?>>> createProxyMap() {
 		Map<Class<?>, Set<Class<?>>> proxyMap = new HashMap<Class<?>, Set<Class<?>>>();
+		addAspectProxy(proxyMap);
+		addTransactionProxy(proxyMap);
+		return proxyMap;
+	}
+	
+	private static void addTransactionProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
+		Set<Class<?>> serviceClassSet = ClassHelper.getServiceClassSet();
+		proxyMap.put(TransactionProxy.class, serviceClassSet);
+	}
+
+	private static void addAspectProxy(Map<Class<?>, Set<Class<?>>> proxyMap) {
 		Set<Class<?>> proxyClassSet = ClassHelper.filterClassSetBySuper(AspectProxy.class);
 		proxyClassSet.forEach(proxyClass -> {
 			if (proxyClass.isAnnotationPresent(Aspect.class)) {
@@ -54,7 +66,6 @@ public class AopHelper {
 				proxyMap.put(proxyClass, targetClassSet);
 			}
 		});
-		return proxyMap;
 	}
 	
 	public static Map<Class<?>, List<Proxy>> createTargetMap(Map<Class<?>, Set<Class<?>>> proxyMap) {

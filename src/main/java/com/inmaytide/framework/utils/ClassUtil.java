@@ -41,7 +41,7 @@ public class ClassUtil {
 		Class<?> cls = null;
 		try {
 			Class.forName(className, isInitialized, getClassLoader());
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException | ExceptionInInitializerError e) {
 			logger.error("load class failure", e);
 			throw new RuntimeException(e);
 		}
@@ -101,7 +101,7 @@ public class ClassUtil {
 			if (file.isFile()) {
 				String className = fileName.substring(0, fileName.lastIndexOf("."));
 				if (StringUtil.isNotEmpty(className)) {
-					className = packageName + className;
+					className = packageName + "." + className;
 				}
 				doAddClass(classSet, className);
 			} else {
