@@ -11,7 +11,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.inmaytide.webapp.helper.DatabaseHelper;
+import com.inmaytide.framework.HelperLoader;
+import com.inmaytide.framework.helper.BeanHelper;
+import com.inmaytide.framework.helper.DatabaseHelper;
 import com.inmaytide.webapp.model.Customer;
 import com.inmaytide.webapp.service.CustomerService;
 
@@ -24,7 +26,8 @@ public class CustomerServiceTest {
 	private final CustomerService customerService;
 	
 	public CustomerServiceTest() {
-		customerService = new CustomerService();
+		HelperLoader.init();
+		customerService = BeanHelper.getBean(CustomerService.class);
 	}
 
 	@Before
