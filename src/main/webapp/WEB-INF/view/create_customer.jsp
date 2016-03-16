@@ -7,7 +7,7 @@
 	<title>客户管理 - 创建客户</title>
 </head>
 <body>
-	<form action="${BASE }/customer_create" method="post">
+	<form action="${BASE }/customer_create" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>客户名称</td>
@@ -37,6 +37,12 @@
 				<td>备注</td>
 				<td>
 					<input type="text" name="remark" />
+				</td>
+			</tr>
+			<tr>
+				<td>照片</td>
+				<td>
+					<input type="file" name="photo" />
 				</td>
 			</tr>
 			<tr>

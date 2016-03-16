@@ -6,6 +6,7 @@ import com.inmaytide.framework.annotation.Inject;
 import com.inmaytide.framework.bean.Data;
 import com.inmaytide.framework.bean.Param;
 import com.inmaytide.framework.bean.View;
+import com.inmaytide.framework.helper.UploadHelper;
 import com.inmaytide.webapp.service.CustomerService;
 
 @Controller
@@ -26,7 +27,8 @@ public class CustomerController {
 	
 	@Action("post:/customer_create")
 	public Data createSubmit(Param param) {
-		boolean result = service.createCustomer(param.getParamMap());
+		boolean result = service.createCustomer(param.getFieldMap());
+		UploadHelper.uploadFile("c:/", param.getFile("photo"));
 		return new Data(result);
 	}
 	
