@@ -24,17 +24,17 @@ public class ControllerAspect extends AspectProxy {
 	private long begin;
 
 	@Override
-	public void after(Class<?> cls, Method method, Object[] params) throws Throwable {
+	public void before(Class<?> cls, Method method, Object[] params) throws Throwable {
 		logger.debug("--------------------- begin ---------------------");
-		logger.debug(String.format("Class: %s", cls.getName()));
+		logger.debug(String.format("Class : %s", cls.getName()));
 		logger.debug(String.format("Method: %s", method.getName()));
 		begin = System.currentTimeMillis();
 	}
 
 	@Override
-	public void before(Class<?> cls, Method method, Object[] params) throws Throwable {
-		logger.debug(String.format("time: %dms", System.currentTimeMillis() - begin));
-		logger.debug("---------------------- end ----------------------");
+	public void after(Class<?> cls, Method method, Object[] params) throws Throwable {
+		logger.debug(String.format(" Time  : %dms", System.currentTimeMillis() - begin));
+		logger.debug(" ---------------------- end ----------------------");
 	}
 	
 	

@@ -4,10 +4,18 @@
 <!doctype html>
 <html>
 <head>
-	<title>客户管理 - 客户列表</title>
+<title>客户管理 - 客户列表</title>
+<script>
+window.onload = function() {
+	document.getElementById("add").onclick = function(){
+		location.href = "${BASE}/customer_create";
+	}
+}
+</script>	
 </head>
 <body>
 <h1>客户列表</h1>
+<div><input type="button" value="添加" id="add"/></div>
 <table>
 	<tr>
 		<th>客户名称</th>

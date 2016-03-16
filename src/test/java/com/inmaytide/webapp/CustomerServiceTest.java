@@ -25,8 +25,11 @@ public class CustomerServiceTest {
 	
 	private final CustomerService customerService;
 	
-	public CustomerServiceTest() {
+	static {
 		HelperLoader.init();
+	}
+	
+	public CustomerServiceTest() {
 		customerService = BeanHelper.getBean(CustomerService.class);
 	}
 

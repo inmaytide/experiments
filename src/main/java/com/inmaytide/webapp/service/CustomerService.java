@@ -3,10 +3,12 @@ package com.inmaytide.webapp.service;
 import java.util.List;
 import java.util.Map;
 
+import com.inmaytide.framework.annotation.Service;
 import com.inmaytide.framework.annotation.Transaction;
 import com.inmaytide.framework.helper.DatabaseHelper;
 import com.inmaytide.webapp.model.Customer;
 
+@Service
 public class CustomerService {
 	
 	public List<Customer> getCustomerList() {
