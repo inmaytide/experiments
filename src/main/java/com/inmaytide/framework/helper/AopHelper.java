@@ -72,7 +72,7 @@ public class AopHelper {
 		Map<Class<?>, List<Proxy>> targetMap = new HashMap<Class<?>, List<Proxy>>(proxyMap.size(), 1);
 		proxyMap.forEach((proxyClass, targetClassSet) -> {
 			targetClassSet.forEach(targetClass -> {
-				Proxy proxy = (Proxy) ReflectionUtil.newInstance(targetClass);
+				Proxy proxy = (Proxy) ReflectionUtil.newInstance(proxyClass);
 				if (targetMap.containsKey(targetClass)) {
 					targetMap.get(targetClass).add(proxy);
 				} else {

@@ -40,7 +40,7 @@ public class ClassUtil {
 	public static Class<?> loadClass(String className, boolean isInitialized) {
 		Class<?> cls = null;
 		try {
-			Class.forName(className, isInitialized, getClassLoader());
+			cls = Class.forName(className, isInitialized, getClassLoader());
 		} catch (ClassNotFoundException | ExceptionInInitializerError e) {
 			logger.error("load class failure", e);
 			throw new RuntimeException(e);

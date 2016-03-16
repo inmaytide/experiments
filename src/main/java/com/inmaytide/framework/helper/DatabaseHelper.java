@@ -12,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
@@ -23,7 +22,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.inmaytide.framework.utils.CollectionUtil;
-import com.inmaytide.framework.utils.PropsUtil;
 
 /**
  * 
@@ -39,18 +37,12 @@ public final class DatabaseHelper {
 	static {
 		queryRunner = new QueryRunner();
 		connectionHolder = new ThreadLocal<Connection>();
+		
 		dataSource = new BasicDataSource();
-		
-		Properties props = PropsUtil.loadProps("config.properties");
-		String driver = props.getProperty("jdbc.driver");
-		String url = props.getProperty("jdbc.url");
-		String username = props.getProperty("jdbc.username");
-		String password = props.getProperty("jdbc.password");
-		
-		dataSource.setDriverClassName(driver);
-		dataSource.setUrl(url);
-		dataSource.setUsername(username);
-		dataSource.setPassword(password);
+		dataSource.setDriverClassName(ConfigHelper.getJdbcDriver());
+		dataSource.setUrl(ConfigHelper.getJdbcUrl());
+		dataSource.setUsername(ConfigHelper.getJdbcUsername());
+		dataSource.setPassword(ConfigHelper.getJdbcPassword());
 	}
 	
 	public static Connection getConnection() {

@@ -6,6 +6,7 @@ package com.inmaytide.framework.bean;
 import java.util.Map;
 
 import com.inmaytide.framework.utils.CastUtil;
+import com.inmaytide.framework.utils.CollectionUtil;
 
 /**
  * @author inmaytide
@@ -45,5 +46,9 @@ public class Param {
 	
 	public Object getObject(String name) {
 		return paramMap.get(name);
+	}
+
+	public boolean isEmpty() {
+		return CollectionUtil.isEmpty(paramMap);
 	}
 }
