@@ -8,10 +8,14 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
@@ -218,5 +222,29 @@ public final class DatabaseHelper {
 			throw new RuntimeException(e);
 		} 
 		
+	}
+
+	public static Object uniqueResult(String sql, String... params) {
+		Object result = null;
+		Connection conn = getConnection();
+		try(PreparedStatement ps = conn.prepareStatement(sql)) {
+			for (int i = 0; i < params.length; i++) {
+				ps.setObject(i + 1, params[i]);
+			}
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				result = rs.getObject(1);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+	
+	public static <T> Set<T> querySet(Class<T> cls, String sql, Object... params) {
+		Set<T> result = new HashSet<T>();
+		result.addAll(DatabaseHelper.queryEntityList(cls, sql, params));
+		return result;
 	}
 }
