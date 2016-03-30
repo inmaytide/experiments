@@ -14,7 +14,7 @@ public class SecurityPlugin implements ServletContainerInitializer{
 	@Override
 	public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
 		//初始化参数
-		ctx.setInitParameter("shiroConfigLocations", "classpass:security.ini");
+		ctx.setInitParameter("shiroConfigLocations", "classpath:security.ini");
 		//注册Listener
 		ctx.addListener(EnvironmentLoaderListener.class);
 		//注册Filter
