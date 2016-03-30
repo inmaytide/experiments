@@ -18,4 +18,8 @@ public interface ConfigConstant {
 	String APP_JSP_PATH = "framework.app.jsp_path";
 	String APP_ASSET_PATH = "framework.app.asset_path";
 	String APP_UPLOAD_LIMIT = "framework.app.upload_limit";
+	
+	
+	String PLUGIN_SECURITY_REALMS = "plugin.security.realms";
+	String PLUGIN_SECURITY_CUSTOM_CLASS = "plugin.security.custom.class";
 }

@@ -67,4 +67,16 @@ public class ReflectionUtil {
 			throw new RuntimeException(e);
 		}
 	}
+
+	public static Object newInstance(String className) {
+		Object instance;
+		try {
+			Class<?> cls = Class.forName(className);
+			instance = newInstance(cls);
+		} catch (ClassNotFoundException e) {
+			logger.error("new instance failure", e);
+			throw new RuntimeException(e);
+		}
+		return instance;
+	}
 }

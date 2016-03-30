@@ -49,6 +49,10 @@ public final class DatabaseHelper {
 		dataSource.setPassword(ConfigHelper.getJdbcPassword());
 	}
 	
+	public static BasicDataSource getDataSource() {
+		return dataSource;
+	}
+	
 	public static Connection getConnection() {
 		Connection con = connectionHolder.get();
 		if (null == con) {

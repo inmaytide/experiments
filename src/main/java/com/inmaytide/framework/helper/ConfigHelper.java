@@ -49,4 +49,28 @@ public class ConfigHelper {
 	public static Integer getAppUploadLimit() {
 		return PropsUtil.getInt(CONFIG_PROPS, ConfigConstant.APP_UPLOAD_LIMIT, 10);
 	}
+	
+	public static String getPluginSecurityRealms() {
+		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.PLUGIN_SECURITY_REALMS);
+	}
+	
+	public static String getPluginSecurityCustomClass() {
+		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.PLUGIN_SECURITY_CUSTOM_CLASS);
+	}
+	
+	public static String getString(String key) {
+		return PropsUtil.getString(CONFIG_PROPS, key);
+	}
+	
+	public static String getString(String key, String defaultValue) {
+		return PropsUtil.getString(CONFIG_PROPS, key, defaultValue);
+	}
+	
+	public static boolean getBoolean(String key) {
+		return PropsUtil.getBoolean(CONFIG_PROPS, key);
+	}
+	
+	public static boolean getBoolean(String key, boolean defalutValue) {
+		return PropsUtil.getBoolean(CONFIG_PROPS, key, defalutValue);
+	}
 }

@@ -7,6 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,5 +39,9 @@ public class CodecUtil {
 			throw new RuntimeException(e);
 		}
 		return target;
+	}
+
+	public static Object md5(String submitted) {
+		return DigestUtils.md5Hex(submitted);
 	}
 }
