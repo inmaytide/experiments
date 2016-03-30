@@ -9,7 +9,6 @@ import com.inmaytide.framework.bean.Param;
 import com.inmaytide.framework.bean.View;
 import com.inmaytide.plugin.security.SecurityHelper;
 import com.inmaytide.plugin.security.exception.AuthcException;
-
 /**
  * 处理系统请求
  * @author inmaytide
@@ -18,11 +17,7 @@ import com.inmaytide.plugin.security.exception.AuthcException;
 public class SystemController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(SystemController.class);
-	
-	@Action("get:/")
-	public View index() {
-		return new View("index.jsp");
-	}
+
 	
 	@Action("get:/login")
 	public View login() {
@@ -45,7 +40,7 @@ public class SystemController {
 	@Action("get:/logout")
 	public View logout() {
 		SecurityHelper.logout();
-		return new View("/");
+		return new View("/login.jsp");
 	}
 	
 }
