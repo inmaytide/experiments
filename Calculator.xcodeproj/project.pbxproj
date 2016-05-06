@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8CCD35FF1CDCD34E00463E6C /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCD35FE1CDCD34E00463E6C /* CalculatorBrain.swift */; };
 		8CFE3FA41CDB926B00EA0062 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE3FA31CDB926B00EA0062 /* AppDelegate.swift */; };
 		8CFE3FA61CDB926B00EA0062 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CFE3FA51CDB926B00EA0062 /* ViewController.swift */; };
 		8CFE3FA91CDB926B00EA0062 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CFE3FA71CDB926B00EA0062 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8CCD35FE1CDCD34E00463E6C /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		8CFE3FA01CDB926B00EA0062 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CFE3FA31CDB926B00EA0062 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CFE3FA51CDB926B00EA0062 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				8CFE3FA51CDB926B00EA0062 /* ViewController.swift */,
+				8CCD35FE1CDCD34E00463E6C /* CalculatorBrain.swift */,
 				8CFE3FA71CDB926B00EA0062 /* Main.storyboard */,
 				8CFE3FB51CDB937E00EA0062 /* SupportsFiles */,
 			);
@@ -145,6 +148,7 @@
 			files = (
 				8CFE3FA61CDB926B00EA0062 /* ViewController.swift in Sources */,
 				8CFE3FA41CDB926B00EA0062 /* AppDelegate.swift in Sources */,
+				8CCD35FF1CDCD34E00463E6C /* CalculatorBrain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +300,7 @@
 				8CFE3FB41CDB926B00EA0062 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

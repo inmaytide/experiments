@@ -249,6 +249,9 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="sHD-Bg-ZEl" secondAttribute="bottom" constant="10" id="wtt-VG-ld8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="display" destination="fWO-ro-HYq" id="jPa-7k-WzW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
