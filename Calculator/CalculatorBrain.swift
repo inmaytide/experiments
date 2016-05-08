@@ -22,14 +22,42 @@ class CalculatorBrain {
         var firstOperand: Double
     }
     
+    typealias PropertyList = AnyObject
+    
     private var accumulator = 0.0
     
     private var pending:PendingBinaryOperationInfo?
+    
+    private var internalProgram = [AnyObject]()
     
     var result: Double {
         get {
             return accumulator;
         }
+    }
+    
+    var program: PropertyList {
+        get {
+            return internalProgram
+        }
+        set {
+            clear()
+            if let arrayOfOps = newValue as? [AnyObject] {
+                for op in arrayOfOps {
+                    if let operand = op as? Double {
+                        setOperand(operand)
+                    } else if let operations = op as? String {
+                        performOperation(operations)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func clear() {
+        accumulator = 0.0
+        pending = nil
+        internalProgram.removeAll()
     }
     
     private var operations = [
@@ -53,9 +81,11 @@ class CalculatorBrain {
     
     func setOperand(operand: Double) {
         accumulator = operand
+        internalProgram.append(operand)
     }
     
     func performOperation(symbol: String) {
+        internalProgram.append(symbol)
         if let operation = operations[symbol] {
             switch operation {
             case .Constant(let value):
